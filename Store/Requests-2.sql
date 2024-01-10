@@ -1,49 +1,59 @@
 -- 1
+-- Показать названия и цены товаров, доставленных на протяжении последнего месяца
 SELECT name, price
 FROM Product
 WHERE date_of_delivery >= DATEADD(MONTH, -1, GETDATE())
 
 -- 2
+-- Показать на экран названия и цены товаров с категорией "Кондитерские изделия", но только не торговой марки "Roshen"
 SELECT name, price
 FROM Product
 WHERE category = 'Кондитерские изделия' AND producer <> 'Roshen'
 
 -- 3
+-- Показать на экран все товары, название которых начинается на букву "К", и категория которых содержит букву "А"
 SELECT *
 FROM Product
 WHERE name LIKE 'К%' AND category LIKE '%А%'
 
 -- 4
+-- Показать на экран все товары, названия которых начинаются с "В" и по "Л" включительно
 SELECT *
 FROM Product
 WHERE name BETWEEN 'В%' AND 'Л%'
 
 -- 5
+-- Показать все товары стоимостью меньше 50 гривен, и датой поставки от 01.10.2023 и до вчерашнего дня
 SELECT *
 FROM Product
 WHERE price < 50 AND date_of_delivery BETWEEN '2023-10-01' AND GETDATE() - 1
 
 -- 6
+-- Показать все товары категории "Безалкогольные напитки", количество которых более 100
 SELECT *
 FROM Product
 WHERE category = 'Безалкогольные напитки' AND quantity > 100
 
 -- 7
+-- Получить информацию о товарах ценой от 100 до 200 гривен, отсортировать цену по возрастанию
 SELECT *
 FROM Product
 WHERE price BETWEEN 100 AND 200
 ORDER BY price ASC
 
 -- 8
+-- Показать на экран все товары, в названии которых содержится РОВНО 3 буквы "О" (в любых местах названия, не обязательно подряд)
 SELECT name
 FROM Product
 WHERE name LIKE '%о%о%о%' AND name NOT LIKE '%о%о%о%о%'
 
 -- 9
+-- Удалить все товары, названия которых состоят из 5 букв
 DELETE FROM Product
 WHERE LEN(name) = 5
 
 -- 10
+-- Показать 5 самых дорогих товаров
 SELECT TOP 5 *
 FROM Product
 ORDER BY price DESC
