@@ -1,5 +1,3 @@
-USE Dating
-
 -- 1
 SELECT TOP 10 users.nick AS 'Nick', users.user_id AS 'Page', users.age AS 'Age', gender.name AS 'Sex', ROUND(AVG(CAST(anketa_rate.rating AS FLOAT)), 1) AS 'Average rating'
 FROM anketa_rate
