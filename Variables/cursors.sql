@@ -85,20 +85,7 @@ END
 CLOSE PrimeNumCursor
 DEALLOCATE PrimeNumCursor
 
--- 3. реализовать на языке Transact-SQL игровой автомат "однорукий бандит".
--- в начале игры есть некий стартовый капитал, например, 500 кредитов,
--- для начала игры необходимо нажать F5.
--- стоимость одного нажатия - 10 кредитов, при нажатии 
--- генерирутся три случайных числа (от 0 до 7).
--- если все три числа одинаковы, назначить приз (например, 50 кредитов),
--- если нет - то и приз никакой не назначается (просто теряем 10 кредитов),
--- кроме трёх случайных чисел показывать текущее состояние счёта, 
--- игра завершается поражением, если закончились деньги.
--- игра завершается победой, если выпало 777. 
--- выдать сообщение о победе или проигрыше, 
--- сбалансировать игру (можно сделать более 50 нажатий на F5 до проигрыша), 
--- для этого, скорее всего, придётся изменить ставки
-
+-- 3
 DECLARE @credits INT = 500
 DECLARE @cost INT = 10
 DECLARE @balance INT = @credits
@@ -140,12 +127,7 @@ IF @balance < @cost
     PRINT 'You lose'
 
 
--- 4.проверить, содержит ли заданная строка одно из 
--- списка нехороших слов (например, 'viagra' или 'XXX').
--- регистр не учитывать, если содержит - пишем на экране 
--- "это спам/получи бан", если нет - пишем "это не спам",
--- нехорошие слова должны храниться в отдельной таблице
--- Создаем таблицу bad_words
+-- 4
 CREATE TABLE BadWords (word varchar(255))
 INSERT INTO BadWords VALUES ('viagra', 'XXX')
 
@@ -214,13 +196,13 @@ END
 CLOSE DataBaseCursor2
 DEALLOCATE DataBaseCursor2
 
--- 5.3 все базы, в названии которых содержится буква А
+-- 5.3
 DECLARE @DataBaseName3 varchar(255)
 
 DECLARE DataBaseCursor3 CURSOR FOR 
 SELECT name 
 FROM master.dbo.sysdatabases 
-WHERE name NOT IN ('master', 'model', 'msdb', 'tempdb') AND name LIKE '%А%'
+WHERE name NOT IN ('master', 'model', 'msdb', 'tempdb') AND name LIKE '%ГЂ%'
 
 OPEN DataBaseCursor3
 FETCH NEXT FROM DataBaseCursor3 INTO @DataBaseName3
